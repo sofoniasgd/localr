@@ -1,8 +1,30 @@
 #!/usr/bin/env bash
 # writes a text on the github commit table
+
+# read every line from the dates file
 while IFS= read -r line;
 do
-	echo "$line"
+	declare -i count=1
+	echo "commiting on $line"
+	# do two commits for each date
+
+	# commit 1 create a file them commit	
+	com_message="${line}_commit#_${count}"
+	touch "$line"
+
+	git add .
+	git commit --date="$line" -m "$com_message"
+	git push
+
+	count=$((count + 1));
+	# commt 2 remove the file then commit
+	com_message="${line}_commit#_${count}"
+	rm "$line"
+
+	git add .
+	git commit --date="$line" -m "$com_message"
+	git push
+
 done < d
 
-# do two commits for each date
+
