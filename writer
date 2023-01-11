@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# writes a text on the github commit table
+while IFS= read -r line;
+do
+	echo "$line"
+done < d
+
+# do two commits for each date
